@@ -27,11 +27,14 @@ public class Parser {
     /**
      * Structure of before and after have to be the same:
      * <pre>
-     * meta: {}
-     * candidates: [ {id: <number>, otherField: "value"} ]
+     * meta: {field:  "value", ...}
+     * candidates: [
+     *              {id: 1, field: "value1"},
+     *              {id: 2, field: "value2"}
+     *            ]
      * <pre/>
-     * @param before Older object state
-     * @param after Newer object state
+     * @param before older object state
+     * @param after newer object state
      *
      * @return JSONObject represents changes between before and after states
      */
