@@ -1,3 +1,7 @@
+import dto.Candidate;
+import dto.Candidates;
+import dto.MetaItem;
+import dto.Result;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 

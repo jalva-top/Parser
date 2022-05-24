@@ -1,6 +1,9 @@
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dto.Candidates;
+import dto.MetaItem;
+import dto.Result;
 import net.sf.json.JSONObject;
 import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
