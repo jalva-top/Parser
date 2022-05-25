@@ -46,13 +46,13 @@ public class Parser {
 
         JSONObject metaBefore = getJSONObject(before, META);
         JSONObject metaAfter = getJSONObject(after, META);
-        final List<MetaItem> metaDiff = createMetaDiff(metaBefore, metaAfter);
+        List<MetaItem> metaDiff = createMetaDiff(metaBefore, metaAfter);
 
-        final JSONArray candidatesBefore = getCandidates(before);
-        final JSONArray candidatesAfter = getCandidates(after);
-        final Candidates candidatesDiff = createCandidatesDiff(candidatesBefore, candidatesAfter);
+        JSONArray candidatesBefore = getCandidates(before);
+        JSONArray candidatesAfter = getCandidates(after);
+        Candidates candidatesDiff = createCandidatesDiff(candidatesBefore, candidatesAfter);
 
-        final Result result = new Result(metaDiff, candidatesDiff);
+        Result result = new Result(metaDiff, candidatesDiff);
 
         return JSONObject.fromObject(result);
     }
@@ -101,14 +101,14 @@ public class Parser {
     }
 
     private Candidates createCandidatesDiff(JSONArray candidatesBefore, JSONArray candidatesAfter) {
-        final Set<Long> idsBefore = getIds(candidatesBefore);
-        final Set<Long> idsAfter = getIds(candidatesAfter);
+        Set<Long> idsBefore = getIds(candidatesBefore);
+        Set<Long> idsAfter = getIds(candidatesAfter);
 
-        final Set<Candidate> edited = findEdited(candidatesBefore, candidatesAfter);
-        final Set<Candidate> added = findIdsExistOnlyInFirstSetAndMapToCandidate(idsAfter, idsBefore);
-        final Set<Candidate> removed = findIdsExistOnlyInFirstSetAndMapToCandidate(idsBefore, idsAfter);
+        Set<Candidate> edited = findEdited(candidatesBefore, candidatesAfter);
+        Set<Candidate> added = findIdsExistOnlyInFirstSetAndMapToCandidate(idsAfter, idsBefore);
+        Set<Candidate> removed = findIdsExistOnlyInFirstSetAndMapToCandidate(idsBefore, idsAfter);
 
-        final Candidates candidates = new Candidates();
+        Candidates candidates = new Candidates();
         candidates.setEdited(edited);
         candidates.setAdded(added);
         candidates.setRemoved(removed);
@@ -117,8 +117,8 @@ public class Parser {
     }
 
     private Set<Candidate> findEdited(JSONArray candidatesBefore, JSONArray candidatesAfter) {
-        final Set<Long> idsBefore = getIds(candidatesBefore);
-        final Set<Long> idsAfter = getIds(candidatesAfter);
+        Set<Long> idsBefore = getIds(candidatesBefore);
+        Set<Long> idsAfter = getIds(candidatesAfter);
 
         return idsBefore.stream()
                 .filter(idsAfter::contains)
@@ -153,7 +153,7 @@ public class Parser {
     }
 
     private Set<Long> getIds(JSONArray arr) {
-        Set<Long> ids = new HashSet<>(arr.size());
+        final Set<Long> ids = new HashSet<>(arr.size());
         for (int i = 0; i < arr.size(); i++) {
             long id = getId(arr.getJSONObject(i));
             ids.add(id);
